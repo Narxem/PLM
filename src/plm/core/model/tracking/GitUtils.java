@@ -85,6 +85,17 @@ public class GitUtils {
 			e.printStackTrace();
 		}
 	}
+
+	public String getLastCommitId() {
+		try {
+			Iterator<RevCommit> it =  git.log().setMaxCount(1).call().iterator();
+			String id = it.next().toString();
+			System.out.println(id);
+			return id;
+		} catch (GitAPIException e) {
+			return "";
+		}
+	}
 	
 	public boolean fetchBranchFromRemoteBranch(String userBranchHash) throws InvalidRemoteException, GitAPIException {
 		if(!getGame().getTrackUser()) {
