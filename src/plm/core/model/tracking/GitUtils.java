@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.swing.SwingWorker;
 
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.MergeCommand;
 import org.eclipse.jgit.api.MergeResult;
 import org.eclipse.jgit.api.PushCommand;
@@ -86,9 +87,12 @@ public class GitUtils {
 		}
 	}
 
-	public String getLastCommitId() {
+	public String getLastCommitId(Stirng file) {
 		try {
-			Iterator<RevCommit> it =  git.log().setMaxCount(1).call().iterator();
+			LogCommand log = git.log();
+			log.setMaxCount(1);
+			log.addPath(file);
+			Iterator<RevCommit> it = log.call().iterator();
 			String id = it.next().toString();
 			System.out.println(id);
 			return id;
