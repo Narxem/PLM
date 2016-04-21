@@ -87,7 +87,7 @@ public class GitUtils {
 		}
 	}
 
-	public String getLastCommitId(Stirng file) {
+	public String getLastCommitId(String file) {
 		try {
 			LogCommand log = git.log();
 			log.setMaxCount(1);
