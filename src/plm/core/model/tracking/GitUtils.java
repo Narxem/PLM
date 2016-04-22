@@ -87,15 +87,17 @@ public class GitUtils {
 		}
 	}
 
-	public String getLastCommitId(String file) {
+	public String getLastCommitId(String exercise, String language) {
+		String filename = exercise + "." + language + ".code";
 		try {
 			LogCommand log = git.log();
 			log.setMaxCount(1);
-			log.addPath(file);
+			log.addPath(filename);
 			Iterator<RevCommit> it = log.call().iterator();
-			String id = it.next().toString();
-			System.out.println(id);
-			return id;
+			if (it.hasNext())
+				return it.next().toString();
+			else
+				return "";
 		} catch (GitAPIException e) {
 			return "";
 		}
