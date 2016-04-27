@@ -97,9 +97,9 @@ public class GitUtils {
 			if (it.hasNext())
 				return it.next().toString();
 			else
-				return "";
-		} catch (GitAPIException e) {
-			return "";
+				return "none";
+		} catch (Exception e) {
+			return "none";
 		}
 	}
 	
